@@ -1,0 +1,13 @@
+{
+  "name": "adhd",
+  "owner": {
+    "name": "matkatmusic"
+  },
+  "plugins": [
+    {
+      "name": "adhd",
+      "source": "./",
+      "description": "ADHD executive-function skills (decide, decompose, focus, momentum, prioritize, reset, timeblock) plus a workflow for importing/amending skills from ADHD self-help URLs."
+    }
+  ]
+}

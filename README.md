@@ -21,21 +21,25 @@ If you invoke a command with no arguments, the skill will ask one focused questi
 
 ## Install — Claude Code (plugin)
 
-Clone the repo and point Claude Code at it:
+Inside Claude Code, add the marketplace and install the plugin:
+
+```
+/plugin marketplace add matkatmusic/adhd
+/plugin install adhd@adhd
+```
+
+Commands will appear under the `adhd` namespace (e.g. `/adhd:decompose`) or as bare names if no conflict. Type `/` to confirm.
+
+For local development — clone and point Claude Code at the working copy:
 
 ```bash
 git clone https://github.com/matkatmusic/adhd.git
-claude --plugin-dir ./adhd
 ```
 
-Or, for a persistent install, symlink into your Claude plugins directory:
-
-```bash
-mkdir -p ~/.claude/plugins
-ln -s "$PWD/adhd" ~/.claude/plugins/adhd
 ```
-
-Restart Claude Code. Commands will appear under the `adhd` namespace (e.g. `/adhd:decompose`) or as bare names if no conflict.
+/plugin marketplace add ./adhd
+/plugin install adhd@adhd
+```
 
 ## Install — Claude.ai
 
