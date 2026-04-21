@@ -1,44 +1,53 @@
-# Executive Function Skills
+# ADHD Executive Function Skills — Claude Code Plugin
 
-Seven slash commands for ADHD-friendly task management. Works in Claude Code and Claude.ai.
+Eight slash commands for ADHD-friendly task management, packaged as a Claude Code plugin. Also usable as standalone skills in Claude.ai.
 
 ## Commands
 
-| Command       | Purpose                                              |
-| ------------- | ---------------------------------------------------- |
-| `/decompose`  | Break an overwhelming task into micro-steps         |
-| `/prioritize` | Triage a task list (Eisenhower + energy cost)       |
-| `/timeblock`  | Build a time-blocked schedule with buffers          |
-| `/decide`     | Definitive recommendation between two options       |
-| `/focus`      | Pre-work ritual + distraction protocol              |
-| `/momentum`   | Velocity check + bottleneck + next move             |
-| `/reset`      | Evening shutdown ritual                             |
+| Command                   | Purpose                                                          |
+| ------------------------- | ---------------------------------------------------------------- |
+| `/decompose`              | Break an overwhelming task into micro-steps                      |
+| `/prioritize`             | Triage a task list (Eisenhower + energy cost)                    |
+| `/timeblock`              | Build a time-blocked schedule with buffers                       |
+| `/decide`                 | Definitive recommendation between two options                    |
+| `/focus`                  | Pre-work ritual + distraction protocol                           |
+| `/momentum`               | Velocity check + bottleneck + next move                          |
+| `/reset`                  | Evening shutdown ritual                                          |
+| `/manage-skill-from-url`  | Import/amend a skill from an ADHD self-help URL                  |
 
 Usage pattern: `/<command> <your input>` — e.g. `/decompose write the AuthV6 state machine tests`.
 
-If you type a command with no arguments, the skill will ask one focused question and stop. If you forget a command name, type `/` in Claude Code to see the full list.
+If you invoke a command with no arguments, the skill will ask one focused question and stop. In Claude Code, type `/` to see the full list.
 
-## Install — Claude Code
+## Install — Claude Code (plugin)
 
-Personal install (all projects):
+Clone the repo and point Claude Code at it:
 
 ```bash
-mkdir -p ~/.claude/skills
-cp -r decompose prioritize timeblock decide focus momentum reset ~/.claude/skills/
+git clone https://github.com/matkatmusic/adhd.git
+claude --plugin-dir ./adhd
 ```
 
-Restart Claude Code (or start a new session). Type `/` to confirm the seven commands appear.
+Or, for a persistent install, symlink into your Claude plugins directory:
 
-Project-scoped install: replace `~/.claude/skills` with `.claude/skills` in your project root. Commit to share with a team.
+```bash
+mkdir -p ~/.claude/plugins
+ln -s "$PWD/adhd" ~/.claude/plugins/adhd
+```
+
+Restart Claude Code. Commands will appear under the `adhd` namespace (e.g. `/adhd:decompose`) or as bare names if no conflict.
 
 ## Install — Claude.ai
 
-Requires a paid plan (Pro, Max, Team, or Enterprise) with code execution enabled.
+Requires a paid plan (Pro, Max, Team, or Enterprise) with custom skills enabled.
 
-1. Upload each `.skill` file via **Settings → Capabilities → Skills → Upload skill** (one at a time).
-2. In any chat, type the command — e.g., `/decompose write the state machine tests`. The skill auto-triggers from the description match.
+Upload each skill's `SKILL.md` individually via **Settings → Capabilities → Skills → Upload skill** — one for each of `skills/decide`, `skills/decompose`, `skills/focus`, `skills/momentum`, `skills/prioritize`, `skills/reset`, `skills/timeblock`. (The plugin manifest under `.claude-plugin/` is Claude Code-specific and not used on Claude.ai.)
 
-Note: Claude.ai's custom-skill invocation is description-driven rather than a hard slash-command parser. Typing `/decompose ...` still works because the description explicitly lists `/decompose` as a trigger phrase. You can also invoke naturally: "decompose: write the tests" or "I'm overwhelmed by writing the tests".
+In any chat, type the command — e.g., `/decompose write the state machine tests`. The skill auto-triggers from the description match. You can also invoke naturally: "decompose: write the tests" or "I'm overwhelmed by writing the tests".
+
+## Adding skills from URLs
+
+`/manage-skill-from-url <url>` fetches an ADHD self-help article and either creates a new skill under `skills/<name>/SKILL.md` or amends an existing one, merging non-destructively. It will ask you to confirm create-vs-amend and the target name before writing.
 
 ## Customizing
 
