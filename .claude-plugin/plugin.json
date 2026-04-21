@@ -1,0 +1,8 @@
+{
+  "name": "adhd",
+  "version": "0.1.0",
+  "description": "ADHD self-help skills, plus a workflow for importing and amending skills from ADHD self-help URLs.",
+  "author": { "name": "matkatmusic" },
+  "repository": "https://github.com/matkatmusic/adhd",
+  "license": "see LICENSE"
+}
